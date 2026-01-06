@@ -76,7 +76,7 @@ S4: En indeks er ikke gratis, den tar opp ekstra lagringsplass. Hvis indeksen di
 - Ditt svar: 
 
 ## Vedlegg Lagringshierarki: Hastighet, kostnad og kapasitet
-Tabellen er relevant for å besvare flere av refleksjonsspørsmålene. Tabellen er kopiert fra ´https://cs145-bigdata.web.app/Section2-Systems/storage-paging.html´.
+Tabellen er relevant for å besvare flere av refleksjonsspørsmålene. Tabellen er kopiert fra `https://cs145-bigdata.web.app/Section2-Systems/storage-paging.html`.
 |Storage Level 	|Access Latency 	|Throughput 	|Cost per TB 	|Typical Capacity 	|Use Case|
 |-|-|-|-|-|-|
 |CPU Registers 	|1 cycle 	|- 	|- 	|< 1KB 	|Immediate values|
