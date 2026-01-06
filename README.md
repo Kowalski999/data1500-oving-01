@@ -60,31 +60,31 @@ S3.2 Basert på denne beregningen, hva ville den teoretiske filstørrelsen vært
 ### Oppgave 2: Ytelsessjokket \- Lineær Skanning (ca. 2.5 timer)
 
 1\. Lag en datagenerator **DataGenerator.java**, som lager en CSV-fil, for eksempel **brukere.csv** med følgende format for hver post: 
-
+```
 1,bruker1@epost.no,Navn Navnesen 1
-
+```
 Kommandoen for å generere filen skal være på følgende format og lese inn 2 argumenter fra kommandolinje: 
-
+```
 java DataGenerator *\<navn\_ny\_fil\_med\_brukerdata\>* *\<antall\_poster\_i\_ny\_fil\>*
-
+```
 hvor det første argumentet *\<navn\_ny\_fil\_med\_brukerdata\>* er filnavn til den nye filen og det andre argumentet *\<antall\_poster\_i\_ny\_fil\>* er antall linjer/poster i filen som blir generert.
 
 2\.  Lag et søkeprogram **FinnBruker.java**, som måler tiden det tar for å finne data for en bruker basert på brukerens epostadressen, og også skriver ut disse dataene, f. eks. for  bruker1@epost.no. 
 
 Kommandoen skal lese inn 2 argumenter fra kommandolinje:
-
+```
 java FinnBruker *\<navn\_fil\_med\_brukerdata\>* *\<epost\_adressen\>*
-
+```
 hvor det første arugmentet *\<navn\_fil\_med\_brukerdata\>* er filnavn, som inneholder informasjon om brukere (som vi kan betrakte som en database), og det andre argumentet er teksten vi søker etter, i dette tilfeller en epostadresse. 
 
 3\. Utfør eksperimentet: test **FinnBruker** med liten fil, tidlig treff i stor fil, og sent treff i stor fil.  
-   
+```
 java DataGenerator brukere\_100.csv 100  
 java FinnBruker brukere\_100.csv bruker55@epost.no  
 java DataGenerator brukere\_10000.csv 10000  
 java FinnBruker brukere\_10000.csv bruker10@epost.no  
 java FinnBruker brukere\_10000.csv bruker9999@epost.no
-
+```
 #### Refleksjonsspørsmål:
 
 S1: Sammenlign tidene fra de tre testene (liten fil, tidlig treff i stor fil, og sent treff i stor fil). Hva forteller dette deg om ytelsen til en lineær skanning?
@@ -97,9 +97,9 @@ S3.1 Hva blir den faktiske filstørrelsen hvis det er 1 millioner rader i filen 
 S3.2 Bruk tabellen i sliden *“Lagringsmedier – fra rask til billig”* fra forelesningen. Hva ville den teoretiske tiden vært for å lese hele denne filen (en full "scan") fra henholdsvis en **HDD (Hard Disk)** og en **High-end SSD**?
 
 S3.3 Anta at følgende formel gjelder: 
-
+```
 Total Time \= AccessLatency \* M \+ DataSize/ScanThroughput 
-
+```
 For en full, sekvensiell skanning kan vi anta at M=1 (dataene leses som én stor, sammenhengende blokk). Sammenlign de teoretiske tidene med den faktiske tiden du målte i Oppgave 2.3 (Stor fil, sent treff). Hvorfor kan tidene være forskjellige? (Hint: Tenk på operativsystemets fil-caching, CPU-bruk for parsing i Java, etc.).
 
 \---
@@ -109,63 +109,69 @@ For en full, sekvensiell skanning kan vi anta at M=1 (dataene leses som én stor
 Med normalisering menes å splitte opp data i flere deler. Formålet er å gjøre søket i data (lesing) mer effektivt og gjøre oppdateringer (skriving) på en måte som eliminerer diverse anomalier, som redundans (samme data lagret mange steder i minne) osv. Vi kommer til å snakke mer om dette gjennom hele semesteret, så foreløpig kun en kort forklaring.
 
 En måte å strukturere data om studenter, kurs (emner) og hvilke emner hver student er påmeldt i kan være: 
-
+```
 101, Mickey, CS, DATA1500, Intro to Databases  
 102, Daffy, EE, DATA1500, Intro to Databases  
 101, Mickey, CS, MATH2000, Calculus
-
+```
 Utfordringen er at data i dette eksemplet blir duplisert (redundans) og ytelsen for både lesing og skriving til lagrede data blir ikke optimal. 
 
 1\.  Lag normaliserte datafiler: **studenter.csv**, **kurs.csv**, **paameldinger.csv**.  
       
-**studenter.csv**  
-    101,Mickey,CS  
-  102,Daffy,EE  
-  103,Donald,CS  
-  104,Minnie,PSY  
-      
-**kurs.csv**  
-    DATA1500,Intro to Databases  
-  PROG1001,Programming 1  
-  MATH2000,Calculus  
-  PHYS1500,Physics  
-      
-**paameldinger.csv**  
-    101,DATA1500  
-  101,PROG1001  
-  101,MATH2000  
-  102,DATA1500  
-  102,PHYS1500  
-  103,DATA1500  
-  103,PROG1001  
-  104,MATH2000  
-  105,PROG1001  
-  105,PHYS1500  
+**studenter.csv**
+```
+101,Mickey,CS  
+102,Daffy,EE  
+103,Donald,CS  
+104,Minnie,PSY  
+```
+**kurs.csv** 
+```
+DATA1500,Intro to Databases  
+PROG1001,Programming 1  
+MATH2000,Calculus  
+PHYS1500,Physics  
+```
+**paameldinger.csv** 
+```
+101,DATA1500  
+101,PROG1001  
+101,MATH2000  
+102,DATA1500  
+102,PHYS1500  
+103,DATA1500  
+103,PROG1001  
+104,MATH2000  
+105,PROG1001  
+105,PHYS1500
+```
       
 2\.  Skriv et Java-program **VisPaameldinger.java** som bruker HashMap for å slå sammen dataene og vise hvilke kurs studentene tar. Må bruke en HashMap objekt for studenter og en for kurs. Så kan man gå sekvensielt gjennom påmeldinger og bruke HashMap objektet for å finne studentnavn og kursnavn og skrive ut  følgende linje for hver påmelding:
 
 *\<studentnavn\>* er påmeldt *\<kursnavn\>*
 
 Filnavn (**studenter.csv**, **kurs.csv**, **paameldinger.csv**) skal leses inn som argumenter på kommandolinje:
-
+```
 java VisPaameldinger *\<arg1\>* *\<arg2\>* *\<arg3\>* 
+```
+hvor 
+- *\<arg1\>* er studenter.csv  
+- *\<arg2\>* er kurs.csv  
+- *\<arg3\>* er paameldinger.csv
 
-hvor *\<arg1\>* er studenter.csv  
-*\<arg2\>* er kurs.csv  
-        *\<arg3\>* er paameldinger.csv
-
-Output skal være på 10 linjer:   
-        Mickey er påmeldt Intro to Databases  
-        Mickey er påmeldt Programming 1  
-        Mickey er påmeldt Calculus  
-        Daffy er påmeldt Intro to Databases  
-        Daffy er påmeldt Physics  
-        Donald er påmeldt Intro to Databases  
-        Donald er påmeldt Programming 1  
-        Minnie er påmeldt Calculus  
-        Goofy er påmeldt Programming 1  
-        Goofy er påmeldt Physics
-
+Output skal være på 10 linjer: 
+```
+Mickey er påmeldt Intro to Databases  
+Mickey er påmeldt Programming 1  
+Mickey er påmeldt Calculus  
+Daffy er påmeldt Intro to Databases  
+Daffy er påmeldt Physics  
+Donald er påmeldt Intro to Databases  
+Donald er påmeldt Programming 1  
+Minnie er påmeldt Calculus  
+Goofy er påmeldt Programming 1  
+Goofy er påmeldt Physics
+```
 #### Refleksjonsspørsmål:
 
 S1: Hvorfor er det mer effektivt å lese **studenter.csv** og **kurs.csv** inn i HashMap først, i stedet for å søke gjennom filene for hver eneste linje i **paameldinger.csv**?
@@ -190,31 +196,33 @@ S3: I din Java-løsning lastet du data inn i RAM. Se på tabellen i sliden *“L
 2\. Generer en indeksfil **brukere.idx** basert på **brukere.csv**. Skriv koden i filen **IndeksBygger.java**.
 
 Filnavn skal leses inn fra kommandolinje:
-
+```
 java IndeksBygger *\<brukerfilen\>* *\<indeksfilen\>*
-
+```
 3\. Lag et indeksert søkeprogram **SokMedIndeks.java** som laster indeksen inn i en HashMap og måler kun oppslagstiden (ikke tiden det tar å overføre data fra disk til RAM, dvs. å fylle inn HashMap\-objektet). Søk etter tekststrengen *\<søkeuttrykk\>*, for eksempel bruker999999@epost.no
 
 Filnavn skal leses inn fra kommandolinje:
-
+```
 java SokMedIndeks *\<brukerfilen\>* *\<indeksfilen\> \<søkeuttrykk\>*
-
-Output må inneholde søkeuttrykket (f. eks. bruker999999@epost.no) for å passere test. 
+```
+Output må inneholde søkeuttrykket (f. eks. `bruker999999@epost.no`) for å passere test. 
 
 4\. Sammenlign den lineære søketiden fra Oppgave 2 med den indekserte oppslagstiden.
 
 **Eksempel ($ \- er prompt-tegn på kommandolinje):**
 
 Oppgave 2  
+```
 $ java FinnBruker brukere\_1million.csv bruker999999@epost.no  
 Fant epost: bruker4999999@epost.no  
 Tid brukt: 521 ms.
-
-Oppgave 4:  
+```
+Oppgave 4:
+```
 $ java SokMedIndeks bruker999999@epost.no  
 Fant linje: 4999999,bruker999999@epost.no,Navn Navnesen 999999  
 Søket med indeks tok 1002000 nanos (1 ms).
-
+```
 #### Refleksjonsspørsmål:
 
 S1: Hva er den observerte tidsforskjellen mellom det lineære søket og det indekserte oppslaget? Hvorfor er forskjellen så enorm?
