@@ -1,22 +1,22 @@
 # Besvarelse på refleksjonspørsmålene
 
-Ditt brukernavn på Oslomet: 
+Ditt brukernavn på Oslomet: lulin7681
 
 ## Refleksjonsspørsmål Oppgave 1 
 
 S1: Hva er fordelene med å lagre data i et slikt format (CSV - Comma Separated Values)?
-- Ditt svar:
+- Ditt svar: Fungerer som en standard. Man vet at verdiene er skilt med komma så man trenger ikke å lete etter seperator i filen
   
 S2: Hva skjer hvis et av feltene, for eksempel et navn, inneholder et komma? Hvilke problemer skaper det for din parsing-logikk?
-- Ditt svar: 
+- Ditt svar: Hvis et felt inneholder et komma vil det ødelegge parsing logikken ved å dele opp et felt i to felter og dermed misplassere verdiene.
 
 S3: Beregning av lagringsbehov
 
 S3.1: La oss lage en forenklet modell for vår fil. Anta at hvert tegn (character) er 1 byte (dette er en forenkling, f.eks. husk UTF-8). Regn ut den omtrentlige størrelsen i bytes for én linje i din fil studenter.csv (f.eks., en linje er 101,Mickey,CS). Ikke glem å telle med kommaene og et tegn for linjeskift.
-- Ditt svar:
+- Ditt svar: Linjene i filen er på henholdsvis 14, 13, 14 og 15 med tegn, inlludert linejskift, som gir et gjennomsnitt på 14 tegn. Hvis vi antar at hvert tegn er 1 byte, vil den omtrentlige størrelsen på en linje i filen min være 14 bytes. 
 
 S3.2 Basert på denne beregningen, hva ville den teoretiske filstørrelsen vært for 1 million studenter? Hvor stor for 1 milliard studenter? Uttrykk svarene i MB, GB eller TB.
-- Ditt svar:
+- Ditt svar: For 1 million studenter vil filstørrelsen være omtrent 13.35 MB og for 1 milliard vil den være omtrent 13.04 GB
 
 ## Refleksjonsspørsmål Oppgave 2
 
