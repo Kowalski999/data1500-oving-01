@@ -34,9 +34,16 @@ public class SokMedIndeks {
 		
 		// O(1) oppslag i indeksen
 		Long posisjon = null;
+
+        Instant start = Instant.now();
+
 		if (indeks != null) {
+
 			posisjon = indeks.get(epostSok);
 		}
+
+        Instant slutt = Instant.now();
+        Duration dur = Duration.between(start, slutt);
 
 		if (posisjon != null) {
 			// Hopp direkte til posisjonen i datafilen
@@ -54,7 +61,10 @@ public class SokMedIndeks {
 		// Skriv ut en linje til stdout (System.out i Java) på følgende format:
         // Søket med indeks tok N nanos (M ms).
         // Hvor N er tallet i nanosekunder og M er tallet i millisekunder.
-		System.out.println("...");
+        System.out.println("Søket med indeks tok "
+                + dur.toNanos() + " nanos ("
+                + dur.toMillis() + " ms).");
 
-	}
+
+    }
 }

@@ -27,6 +27,20 @@ public class HashJoin {
                     // Tips: skriv ut post (linje) til stdout (System.out i Java) på følgende format
                     // <studentnavn> er påmeldt <kursnavn>
 					          // Skriv din kode her ...
+                            int studentID = Integer.parseInt(felt[0]);
+                            String kursID = felt[1];
+
+                            String studentNavn = studenter.get(studentID);
+                            String kursNavn = kurs.get(kursID);
+
+                            if (studentNavn != null && kursNavn != null) {
+
+                                System.out.println(studentNavn + " er påmeldt " + kursNavn);
+
+                            }
+
+
+
                   
 				        }
 			      } 

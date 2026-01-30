@@ -23,12 +23,15 @@ public class IndeksBygger {
             
             // Leser sekvensielt linje etter linje og finner posisjon i filen til første tegn på hver linje
 			while ((linje = raf.readLine()) != null) {
-				String epost = linje.split(",")[1].trim();  
+				String epost = linje.split(",")[1].trim();
 				// Tips: sett inn epost og psosisjon i HashMap objektet indeks
                 // Skriv din kode her ...
                 
 				posisjon = raf.getFilePointer();
-			}
+
+                indeks.put(epost, posisjon);
+
+            }
 
 		} catch (IOException e) {
 			e.printStackTrace();
